@@ -2,15 +2,9 @@ extends Control
 
 var _upperalphabetChars: = ["A", "B", "C", "D", "E", "F", "I", "J",
 			  "K", "L", "M", "N", "O", "P","Q", "R",
-			  "S", "T", "U", "V", "W", "X", "Y", "Z"]
-
-var _loweralphabetChars: = ['a','b','c','d','e','f','g',
-							'h','i','j','k','l','m','n',
-							'o','p','q','r','s','t','u',
-							'v','w','x','y','z']
+			  "S", "T", "U", "V", "W", "X", "Y", "Z",
+			  '!', '@', '#', '$', '&', '_']
 							
-var _specialChars: = ['!', '@', '#', '$', '&', '_']
-
 var length: = 0
 var genAmount: = 0
 var _genCount: = 0
@@ -37,44 +31,24 @@ func _on_amount_changed(new_text):
 func generate(length: int, amount: int) -> void:
 	for j in amount:
 		for i in length:
-			_latestText += get_random_character(_upperalphabetChars, _loweralphabetChars, _specialChars)
+			var UL = randi() % 2 + 1
+			if UL == 1:
+				_latestText += get_random_character(_upperalphabetChars)
+			else:
+				_latestText += get_random_character(_upperalphabetChars).to_lower()
 
 		richText.add_text(_latestText + "\n")
 		_latestText = ""
 
-func get_random_character(arr1: Array, arr2: Array, arr3: Array) -> String:
-	
-	var _newChar: = ""
-	var randomNum = get_random_number(0, true)
-	
-	if randomNum == 0:
-		_newChar = arr1[get_random_number(0, false)]
-	
-	elif randomNum == 1:
-		_newChar = arr2[get_random_number(1, false)]
-	
-	else:
-		_newChar = arr3[get_random_number(2, false)]
-	
-	return _newChar
+func get_random_character(arr1: Array) -> String:
+		
+	return arr1[get_random_number(0)]
 
-func get_random_number(arrNumber: int, normalNum: bool) -> int:
+func get_random_number(arrNumber: int) -> int:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var randomNumber 
 	
-	if normalNum == false:
-		var n: = 0
-		if(arrNumber == 0 || arrNumber == 1):
-			n = _upperalphabetChars.size()
-		else:
-			n = _specialChars.size()
-		
-		randomNumber = int(rng.randf_range(0, n))
-	else:
-		randomNumber = int(rng.randf_range(0,3))
-	
-	return randomNumber
+	return int(rng.randf_range(0, _upperalphabetChars.size()))
 
 func _on_LengthLineEdit_focus_entered():
 	$LengthLineEdit.clear()

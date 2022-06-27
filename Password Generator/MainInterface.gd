@@ -7,8 +7,6 @@ var _upperalphabetChars: = ["A", "B", "C", "D", "E", "F", "I", "J",
 							
 var length: = 0
 var genAmount: = 0
-var _genCount: = 0
-
 var _latestText: = ""
 
 onready var richText = $RichTextLabel

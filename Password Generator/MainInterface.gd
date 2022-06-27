@@ -55,16 +55,3 @@ func _on_LengthLineEdit_focus_entered():
 
 func _on_AmountLineEdit_focus_entered():
 	$AmountLineEdit.clear()
-
-
-"""
-func generate(length: int, amount: int) -> void:
-	randomize()
-	password = "" 
-	while password.length() < length:
-		var select = randi() % arr1.size()
-		var UL = randi() % 2 + 1
-		if UL == 1:
-			password += arr1[select].to_lower()
-		
-"""
